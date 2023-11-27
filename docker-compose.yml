@@ -1,0 +1,21 @@
+version: '1.0.1'
+services:
+  mysql:
+    image: mysql
+    container_name: security_mysql
+    ports:
+      - '3306:3306'
+    volumes:
+      - './mysql:/var/lib/mysql'
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=123'
+    restart: unless-stopped
+  securityphp:
+    build: './php'
+    image: securityphp
+    container_name: security_php
+    ports:
+      - '80:80'
+    volumes:
+      - './php:/var/www/html'
+    restart: unless-stopped
